@@ -1,0 +1,18 @@
+echo "\033[1;33mWarning: $1\033[0m"
+
+warning="\033[1;33m❯"
+approved="\033[1;32m✔"
+fixer="\033[1;31m✖"
+reset="\033[0m"
+
+echo "${warning} Iniciando build...${reset}"
+
+echo 'Verificando exports... ' &&
+node scripts/generate-exports.js &&
+
+if npm run build; then
+  echo "${approved} Build finalizada com sucesso! Conferir resultado.${reset}"
+else
+  echo "${fixer} Build falhou! Abortando push.${reset}"
+  exit 1
+fi

@@ -1,0 +1,21 @@
+warning="\033[1;33m❯"
+approved="\033[1;32m√"
+fixer="\033[1;31m×"
+reset="\033[0m"
+
+echo ""
+echo "${warning} Iniciando checagem de tipos... ${reset}"
+if npx tsc --noEmit --skipLibCheck; then
+  echo "${approved} Checagem de tipos finalizada com sucesso!${reset}"
+else
+  echo "${fixer} Erro na checagem de tipos. Corrija antes de commitar.${reset}"
+  exit 1
+fi
+
+echo "${warning} Iniciando checagem de lint e formato... ${reset}"
+if npm run lint; then
+  echo "${approved} Código formatado e validado!${reset}"
+else
+  echo "${fixer} Erros na formatação do código. Corrija antes de commitar.${reset}"
+  exit 1
+fi
