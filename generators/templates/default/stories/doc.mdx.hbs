@@ -1,0 +1,64 @@
+import {
+  Canvas,
+  Controls,
+  Subtitle,
+  Title
+} from "@storybook/blocks";
+
+import CodeDocumentationTable from "../../../CodeDocumentationTable";
+import DetailsCode from "../../../DetailsCode";
+import Functionality from "../../../Functionality";
+import * as {{ pascalCase name }}Stories from '../index.stories';
+
+<Title />
+
+<Subtitle>Descrição do componente {{ pascalCase name }}</Subtitle>
+
+<Canvas of={ {{ pascalCase name }}Stories.Default } />
+
+<Functionality list={[
+ "Funcionalidades do componente do componente {{ pascalCase name }}"
+ ]} />
+
+## Sumário
+
+- [Objetivo](#objetivo)
+- [Acessibilidade](#acessibilidade)
+- [Utilização](#utilização)
+- [Propriedades](#propriedades)
+
+## Objetivo
+
+O objetivo do componente **{{ pascalCase name }}** é ...
+
+## Acessibilidade
+
+Veja abaixo as interações de teclado disponíveis no componente `{{ pascalCase name }}`:
+
+<CodeDocumentationTable
+  codesList={[
+    {
+      key: 'Nenhuma interação',
+      description: ['Descrição das interações no componente {{ pascalCase name }}'],
+    },
+  ]}
+/>
+
+## Utilização
+
+<DetailsCode summary="index.ts">
+  
+```tsx
+import { {{ pascalCase name }} } from '@azul/react-web-components';
+
+const App = () => {
+  return (
+    <{{ pascalCase name }}  />
+  );
+};
+```
+</DetailsCode>
+
+## Propriedades
+
+<Controls />

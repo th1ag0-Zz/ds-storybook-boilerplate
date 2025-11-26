@@ -1,0 +1,74 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guias/O que são compound components?" />
+
+# O que são compound components?
+
+## Introdução
+
+Compound Components (ou Componentes Compostos) é um padrão de design de código que 
+permite criar componentes React mais flexíveis e modulares, dividindo-os em subcomponentes 
+menores que trabalham juntos de forma coesa. Este padrão é especialmente útil 
+quando precisamos criar componentes complexos que necessitam de alta flexibilidade 
+e customização.
+
+## Quando usar?
+
+O padrão Compound Components é mais adequado nas seguintes situações:
+
+- Componentes complexos que possuem múltiplas partes interativas
+- Interfaces que precisam ser altamente flexíveis e customizáveis
+- Componentes que podem ter diferentes variações de layout
+- Quando há necessidade de compartilhar estado entre subcomponentes
+
+Por exemplo, em nosso Design System, o componente `Accordion` utiliza este padrão:
+
+```tsx
+<Accordion.Root>
+  <Accordion.Item>
+    <Accordion.Trigger title="Título" isOpen={true} />
+    <Accordion.Content isOpen={true}>Conteúdo</Accordion.Content>
+  </Accordion.Item>
+</Accordion.Root>
+```
+
+## Quando não usar?
+
+O padrão Compound Components pode não ser a melhor escolha quando:
+
+- O componente é simples e tem poucas variações
+- Não há necessidade de flexibilidade no layout
+- O componente tem uma única responsabilidade bem definida
+- A complexidade adicional não traz benefícios claros
+
+## Benefícios
+
+- **Flexibilidade**: Permite que os desenvolvedores controlem exatamente como o componente será estruturado.
+
+- **Encapsulamento**: Mantém a lógica relacionada agrupada, mas permite customização quando necessário.
+
+- **Reutilização**: Subcomponentes podem ser reutilizados em diferentes contextos.
+
+- **Manutenibilidade**: Código mais organizado e mais fácil de manter.
+
+## Exemplo Prático
+
+O componente `Notification` em nosso Design System demonstra bem o uso deste padrão:
+
+```tsx
+<Notification.Root>
+  <Notification.Icon icon={Rocket} />
+  <Notification.Content text="Mensagem da notificação" />
+  <Notification.Actions>
+    <Notification.Action icon={Check} />
+    <Notification.Action icon={X} />
+  </Notification.Actions>
+</Notification.Root>
+```
+
+## Conclusão
+
+O padrão Compound Components nos permite criar componentes flexíveis e reutilizáveis, 
+mantendo uma API intuitiva para os desenvolvedores. No entanto, é importante avaliar 
+a complexidade do componente antes de decidir usar este padrão, pois nem sempre a 
+flexibilidade adicional justifica a complexidade extra.

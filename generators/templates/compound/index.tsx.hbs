@@ -1,0 +1,21 @@
+{{#each subcomponents}}
+import {{ pascalCase this }} from './components/{{ pascalCase this }}';
+{{/each}}
+
+{{#each subcomponents}}
+import type { I{{ pascalCase this }}Props } from './components/{{ pascalCase this }}/types';
+{{/each}}
+
+export type {
+  {{#each subcomponents}}
+  I{{ pascalCase this }}Props{{#unless @last}},{{/unless}}
+  {{/each}}
+};
+
+const {{ pascalCase name }} = {
+  {{#each subcomponents}}
+  {{ pascalCase this }},
+  {{/each}}
+};
+
+export default {{ pascalCase name }};

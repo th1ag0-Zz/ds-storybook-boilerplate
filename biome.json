@@ -8,6 +8,11 @@
   "files": {
     "ignoreUnknown": false
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -123,7 +128,12 @@
   },
   "overrides": [
     {
-      "includes": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "src/**/*.cts"],
+      "includes": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.mts",
+        "src/**/*.cts"
+      ],
       "linter": {
         "rules": {
           "complexity": {

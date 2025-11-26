@@ -1,0 +1,23 @@
+import type { Meta, StoryFn } from '@storybook/react';
+import {{ pascalCase name }} from '../index.tsx';
+import {{ camelCase name }}Docs from './docs/{{ camelCase name }}.mdx';
+import { {{ camelCase name }}PropsTypes } from './docs/props-types/props.ts';
+import { I{{ pascalCase name }}Props } from '../types';
+import { StoryTemplate } from './templates/index.tsx'
+
+const StoryData: Meta<I{{ pascalCase name }}Props> = {
+  title: 'Components/{{ pascalCase name }}',
+  component: {{ pascalCase name }},
+  parameters: {
+    docs: {
+      page: {{ camelCase name }}Docs,
+    }
+  },
+  argTypes: {{ camelCase name }}PropsTypes, 
+};
+
+export const Default: StoryFn<I{{ pascalCase name }}Props> = props => {
+  return <StoryTemplate {...props} />;
+};
+
+export default StoryData;

@@ -1,0 +1,136 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guias/Como contribuir?" />
+
+# Como contribuir com mudanças e alterações?
+
+## Padrão de Commits Semânticos
+
+Antes de realizar seus commits, é importante seguir o padrão de commits semânticos 
+para manter a consistência no histórico do projeto. O formato básico de um commit 
+semântico é:
+```bash
+<tipo>[escopo opcional]: <descrição>
+[corpo opcional]
+[rodapé(s) opcional(is)]
+```
+
+### Tipos de Commit
+- **feat**: Adição de nova funcionalidade
+- **fix**: Correção de bugs
+- **docs**: Alterações em documentação
+- **style**: Mudanças que não afetam o significado do código (espaços, formatação, etc)
+- **refactor**: Mudanças no código que não corrigem bugs nem adicionam funcionalidades
+- **perf**: Mudanças relacionadas a performance
+- **test**: Adição ou correção de testes
+- **chore**: Mudanças no processo de build, ferramentas auxiliares, bibliotecas, etc
+
+### Exemplos
+```bash
+- **feat(button): adiciona variante outline ao componente**
+- **fix(accordion): corrige animação de abertura**
+- **docs: atualiza documentação do componente de Table**
+- **style: ajusta indentação dos arquivos**
+- **test(notification): adiciona testes para novas props**
+```
+
+### Boas Práticas
+- Use o imperativo na descrição ("adiciona", não "adicionado")
+- Primeira letra da descrição em minúsculo
+- Não use ponto final na descrição
+- Limite a primeira linha em 72 caracteres
+- Descreva o "o quê" e o "por quê" no corpo do commit, se necessário
+
+## Processo de Validação Pré-commit
+
+Antes de realizar qualquer commit com suas alterações, é importante entender que 
+o projeto utiliza o Husky para executar validações automáticas através de um script 
+de pre-commit. Vamos entender o que cada etapa desse script faz:
+
+```bash
+# 1. Executa o lint-staged para verificar arquivos modificados
+npx --no-install lint-staged
+
+# 2. Inicia verificação de tipos nos pacotes
+pnpm --filter @monorepo-ds-boilerplate/react --filter @monorepo-ds-boilerplate/tokens --filter @monorepo-ds-boilerplate/docs exec tsc --noEmit --skipLibCheck
+
+# 3. Executa os testes do Storybook
+pnpm --filter @monorepo-ds-boilerplate/docs test-storybook
+```
+
+### Detalhamento das etapas:
+
+- **1. Lint-staged**: Verifica apenas os arquivos que estão em staging (modificados), aplicando regras de linting e formatação.
+- **2. Verificação de tipos**: Executa o TypeScript Compiler (tsc) em todos os pacotes principais do projeto:
+  - @monorepo-ds-boilerplate/react
+  - @monorepo-ds-boilerplate/tokens
+  - @monorepo-ds-boilerplate/docs
+- **3. Testes do Storybook**: Executa a suite de testes dos componentes no Storybook 
+para garantir que as alterações não quebraram nenhum comportamento existente.
+
+Se qualquer uma dessas etapas falhar, o commit será abortado e você precisará corrigir 
+os problemas antes de prosseguir.
+
+## Processo de Versionamento
+
+Após finalizar suas alterações e realizar todos os commits necessários, antes de 
+criar um Pull Request, você precisa seguir duas etapas importantes:
+
+### Criar um Changeset
+
+Execute o comando:
+
+```bash
+pnpm changeset
+```
+
+Este comando irá:
+- Perguntar quais pacotes foram modificados
+- Solicitar o tipo de alteração para cada pacote (major, minor ou patch)
+- Pedir uma descrição das mudanças realizadas
+- Atualizar os arquivos CHANGELOG.md correspondentes
+
+### Entendendo o Versionamento Semântico (SemVer):
+
+- **MAJOR (x.0.0)**: Alterações incompatíveis com versões anteriores
+- **MINOR (0.x.0)**: Adição de funcionalidades mantendo compatibilidade
+- **PATCH (0.0.x)**: Correções de bugs mantendo compatibilidade
+
+Por exemplo:
+- **De 1.0.0 para 2.0.0 (MAJOR)**: Mudanças que quebram compatibilidade
+- **De 1.0.0 para 1.1.0 (MINOR)**: Novas features compatíveis
+- **De 1.0.0 para 1.0.1 (PATCH)**: Correções de bugs
+
+### Atualizar as Versões
+
+Execute o comando:
+
+```bash
+pnpm version-packages
+```
+
+Este comando irá:
+- Ler os changesets gerados
+- Atualizar automaticamente as versões dos pacotes afetados
+
+### Atualizar a Documentação de Changelog
+
+Após gerar as novas versões, é necessário atualizar a documentação de changelog no Storybook:
+
+- 1 - Acesse os arquivos CHANGELOG.md gerados em cada pacote modificado (geralmente em `packages/[nome-do-pacote]/CHANGELOG.md`)
+- 2 - Copie o conteúdo das alterações mais recentes
+- 3 - Adicione as alterações no arquivo `apps/docs/src/pages/changelog.mdx`, seguindo o formato existente:
+```bash
+@monorepo-ds-boilerplate/[nome-do-pacote]
+[nova-versão]
+[Título de Major, Minor ou Patch Changes]
+[descrição das alterações]
+```
+Esta etapa é crucial para manter um histórico centralizado e acessível de todas as alterações realizadas no Design System.
+
+### Criar Pull Request
+
+Após estes passos, você pode criar seu Pull Request com todas as alterações, 
+incluindo os arquivos de changelog e as atualizações de versão. Antes de submeter o PR, 
+não se esqueça de consultar o guia [Como validar novas implementações?](?path=/docs/guias-como-validar-novas-implementações--docs) 
+para garantir que todas as validações necessárias foram realizadas.

@@ -1,0 +1,16 @@
+import { IDocPropTableProps } from '../../../../../stories/components/docs/components/DocPropTable/types';
+import { {{ pascalCase name }}ComponentsValuesEnum } from './components';
+import type { ArgTypes } from '@storybook/react';
+{{#each subcomponents}}
+
+export const {{ camelCase this }}PropsTypes: IDocPropTableProps['props'][number][] = []
+
+{{/each}}
+
+const {{ camelCase name }}ComponentsPropsTypes = {
+  {{#each subcomponents}}
+  [{{ pascalCase ../name }}ComponentsValuesEnum.{{ upperCase this }}]: {{ camelCase this }}PropsTypes{{#unless @last}},{{/unless}}
+  {{/each}}
+};
+
+export { {{ camelCase name }}ComponentsPropsTypes };

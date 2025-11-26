@@ -1,0 +1,10 @@
+
+import { StoryFn } from '@storybook/react';
+
+import {{ pascalCase name }} from '../../index';
+
+export const StoryTemplate: StoryFn = () => (
+  <{{ pascalCase name }}.{{ pascalCase (lookup subcomponents 0) }}>
+    {{!-- Insira os outros componentes --}}
+  </{{ pascalCase name }}.{{ pascalCase (lookup subcomponents 0) }}>
+);

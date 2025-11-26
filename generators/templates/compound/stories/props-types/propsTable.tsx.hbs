@@ -1,0 +1,17 @@
+import { IComponentPropsTable } from '../../../../../stories/components/docs/components/DocPropTableTabs/types';
+import { DocPropTable } from '../../../../../stories/components/docs/components/DocPropTable';
+import { {{ pascalCase name }}ComponentsValuesEnum } from './components';
+import { {{ camelCase name }}ComponentsPropsTypes } from './propsTypes';
+
+const {{ camelCase name }}PropsTable: IComponentPropsTable[] = [
+{{#each subcomponents}}
+  {
+    componentName: {{ pascalCase ../name }}ComponentsValuesEnum.{{ upperCase this }},
+    component: (
+      <DocPropTable props={ {{ camelCase ../name }}ComponentsPropsTypes[{{ pascalCase ../name }}ComponentsValuesEnum.{{ upperCase this }}] } />
+    ),
+  }{{#unless @last}},{{/unless}}
+{{/each}}
+];
+
+export { {{ camelCase name }}PropsTable };

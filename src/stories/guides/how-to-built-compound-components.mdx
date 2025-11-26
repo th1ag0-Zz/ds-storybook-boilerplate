@@ -1,0 +1,153 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guias/Como construir compound components?" />
+
+# Como construir compound components?
+
+## Estrutura de Diretórios
+
+Primeiro, vamos criar a estrutura de diretórios necessária para o novo componente 
+dentro de packages/react/src/components:
+
+```
+MyComponent/
+├── components/
+│   ├── MyComponentRoot/
+│   │   ├── index.tsx
+│   │   └── types.ts
+│   ├── MyComponentSubComponent1/
+│   │   ├── index.tsx
+│   │   └── types.ts
+│   └── MyComponentSubComponent2/
+│       ├── index.tsx
+│       └── types.ts
+└── index.tsx
+```
+
+## Passo a Passo
+
+### 1. Criar o Arquivo Principal
+
+Crie o arquivo index.tsx na raiz do componente:
+
+```tsx
+import '../../styles/index.css';
+
+import { MyComponentRoot } from './components/MyComponentRoot';
+import { MyComponentSubComponent1 } from './components/MyComponentSubComponent1';
+import { MyComponentSubComponent2 } from './components/MyComponentSubComponent2';
+
+import type { IMyComponentRootProps } from './components/MyComponentRoot/types';
+import type { IMyComponentSubComponent1Props } from './components/MyComponentSubComponent1/types';
+import type { IMyComponentSubComponent2Props } from './components/MyComponentSubComponent2/types';
+
+export type {
+  IMyComponentRootProps,
+  IMyComponentSubComponent1Props,
+  IMyComponentSubComponent2Props,
+};
+
+export const MyComponent = {
+  Root: MyComponentRoot,
+  SubComponent1: MyComponentSubComponent1,
+  SubComponent2: MyComponentSubComponent2,
+};
+```
+
+### 2. Implementar os Subcomponentes
+
+Para cada subcomponente, crie os arquivos necessários:
+
+**MyComponentRoot/types.ts:**
+
+```ts
+import { ReactNode } from 'react';
+
+interface IMyComponentRootProps {
+  children: ReactNode;
+}
+
+export type { IMyComponentRootProps };
+```
+
+**MyComponentRoot/index.tsx:**
+
+```tsx
+import { IMyComponentRootProps } from './types';
+
+export function MyComponentRoot({ children }: IMyComponentRootProps) {
+  return (
+    <div className="base-component-styles">
+      {children}
+    </div>
+  );
+}
+```
+
+### 3. Adicionar ao Arquivo de Exports
+
+Adicione o novo componente ao arquivo packages/react/src/components/index.ts:
+
+```ts
+export const components = {
+  accordion: 'components/Accordion',
+  notification: 'components/Notification',
+  mycomponent: 'components/MyComponent', // Novo componente
+} as const;
+```
+
+### 4. Exportar no Arquivo Principal
+
+Adicione a exportação no arquivo packages/react/src/index.tsx:
+
+```ts
+import './styles/index.css';
+
+export * from './components/Accordion';
+export * from './components/Notification';
+export * from './components/MyComponent'; // Nova exportação
+```
+
+### 5. Configurar Package.json
+
+O script generate-exports.ts irá automaticamente atualizar o package.json com as 
+novas exportações quando você executar o build. O resultado será similar a:
+
+```json
+{
+  "exports": {
+    "./mycomponent": {
+      "types": "./dist/components/MyComponent/index.d.ts",
+      "import": "./dist/components/MyComponent/index.mjs",
+      "require": "./dist/components/MyComponent/index.js"
+    }
+  }
+}
+```
+
+### 6. Build e Teste
+
+Após implementar o componente, execute:
+
+```bash
+pnpm build
+```
+
+Agora você pode importar o componente de duas formas:
+
+```tsx
+// Importação completa
+import { MyComponent } from '@monorepo-ds-boilerplate/react';
+
+// Importação individual
+import { MyComponent } from '@monorepo-ds-boilerplate/react/mycomponent';
+```
+
+## Observações Importantes
+
+- 1 - Siga o padrão de nomenclatura existente no projeto
+- 2 - Adicione testes para o novo componente
+- 3 - Documente o componente no Storybook
+- 4 - Mantenha a consistência com os outros componentes do Design System
+
+Para exemplos práticos de implementação, você pode se basear nos componentes existentes de Accordion e Notification.

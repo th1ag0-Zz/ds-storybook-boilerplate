@@ -1,0 +1,14 @@
+import { {{ camelCase name }}Styles } from './styles';
+import { I{{ pascalCase name }}Props } from './types';
+
+const {{ pascalCase name }} = (props: I{{ pascalCase name }}Props) => {
+  return (
+    <div className={ {{ camelCase name }}Styles() } {...props}>
+      {{ pascalCase name }}
+    </div>
+  );
+};
+
+{{ pascalCase name }}.displayName = '{{ pascalCase name }}';
+
+export default {{ pascalCase name }};

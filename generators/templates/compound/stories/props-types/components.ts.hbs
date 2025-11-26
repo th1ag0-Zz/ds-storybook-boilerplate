@@ -1,0 +1,22 @@
+enum {{ pascalCase name }}ComponentsValuesEnum {
+{{#each subcomponents}}
+  {{ upperCase this }} = '{{ lowerCase this }}',
+{{/each}}
+}
+
+enum {{ pascalCase name }}ComponentsNamesEnum {
+{{#each subcomponents}}
+  {{ upperCase this }} = '{{ pascalCase this }}',
+{{/each}}
+}
+
+const {{ camelCase name }}Components = [
+{{#each subcomponents}}
+  {
+    value: {{ pascalCase ../name }}ComponentsValuesEnum.{{ upperCase this }},
+    name: {{ pascalCase ../name }}ComponentsNamesEnum.{{ upperCase this }},
+  }{{#unless @last}},{{/unless}}
+{{/each}}
+];
+
+export { {{ pascalCase name }}ComponentsValuesEnum, {{ pascalCase name }}ComponentsNamesEnum, {{ camelCase name }}Components };

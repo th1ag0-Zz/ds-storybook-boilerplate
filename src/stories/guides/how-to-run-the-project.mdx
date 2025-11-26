@@ -1,0 +1,80 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guias/Como rodar o projeto?" />
+
+# Como rodar o projeto localmente?
+
+## Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- PNPM (versão 9.14.2 ou superior)
+
+## Instalação das dependências
+
+Para instalar todas as dependências do monorepo de uma vez, execute no diretório raiz:
+
+```bash
+pnpm install
+```
+
+Este comando instalará as dependências de todos os pacotes e aplicações do monorepo automaticamente.
+
+## Rodando todos os projetos
+
+Para rodar todos os projetos simultaneamente, use o comando:
+
+```bash
+pnpm dev
+```
+
+Este comando utilizará o Turborepo para executar em paralelo todos os scripts `dev` definidos nos pacotes.
+
+## Rodando projetos específicos
+
+Se você precisar rodar apenas um projeto específico, pode utilizar a flag `--filter` seguida do nome do pacote. O nome do pacote pode ser encontrado no campo `name` do `package.json` de cada projeto.
+
+### Exemplos:
+
+Para rodar apenas a documentação (Storybook):
+
+```bash
+pnpm dev --filter @monorepo-ds-boilerplate/docs dev
+```
+
+Para rodar apenas o pacote de tokens em modo de desenvolvimento:
+
+```bash
+pnpm dev --filter @monorepo-ds-boilerplate/tokens dev
+```
+
+Para rodar apenas a biblioteca de componentes React:
+
+```bash
+pnpm dev --filter @monorepo-ds-boilerplate/react dev
+```
+
+## Identificando o nome do pacote
+
+Para identificar o nome correto do pacote para usar com a flag `--filter`, verifique o campo `name` no arquivo `package.json` dentro do diretório do pacote desejado:
+
+- Para pacotes: `packages/[nome-do-pacote]/package.json`
+- Para aplicações: `apps/[nome-da-aplicação]/package.json`
+
+Por exemplo:
+
+```json
+{
+  "name": "@monorepo-ds-boilerplate/react",
+  ...
+}
+```
+
+Neste caso, o nome a ser usado com `--filter` seria `@monorepo-ds-boilerplate/react`.
+
+## Scripts disponíveis
+
+Outros comandos úteis que podem ser executados na raiz do projeto:
+
+- `pnpm build`: Compila todos os pacotes e aplicações.
+- `pnpm lint`: Executa o linting em todos os pacotes e aplicações.
+- `pnpm test`: Executa os testes em todos os pacotes e aplicações.

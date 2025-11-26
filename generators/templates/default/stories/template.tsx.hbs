@@ -1,0 +1,10 @@
+
+import { StoryFn } from '@storybook/react';
+
+import {{ pascalCase name }} from '../../index';
+
+export const StoryTemplate: StoryFn<typeof {{ pascalCase name }}> = props => (
+  <div>
+    <{{ pascalCase name }} {...props} />
+  </div>
+);

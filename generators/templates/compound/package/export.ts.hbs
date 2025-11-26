@@ -1,0 +1,6 @@
+export { default } from '../components/{{ pascalCase name }}';
+export {
+{{#each subcomponents}}
+  I{{ pascalCase this }}Props{{#unless @last}},{{/unless}}
+{{/each}}
+} from '../components/{{ pascalCase name }}/index';

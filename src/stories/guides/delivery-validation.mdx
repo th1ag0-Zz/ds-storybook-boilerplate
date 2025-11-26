@@ -1,0 +1,31 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guias/Como validar novas implementações?" />
+
+# Checklist de itens para se cumprir ao subir um PR no DS:
+  
+Para garantir a qualidade da entrega de novas funcionalidades dentro da biblioteca, 
+ao subir um Pull Request para realizar alterações, deve-se inserir uma checklist de 
+itens dentro da descrição e marcá-los como feitos conforme os cenários estabelecidos, 
+e, caso não tenham sido cumpridos, realizar as mudanças necessárias para que os itens 
+sejam atendidos e assim enviar o Pull Request.
+
+```markdown
+- [ ] Está atendendo aos padrões estabelecidos de JSX/React?
+- [ ] É um novo componente?
+  - [ ] É um componente complexo que possui diversos subcomponentes?
+    - [ ] Foi desenvolvido atendendo o Pattern Compound?
+  - [ ] Foi estilizado com Tailwind?
+  - [ ] Foram feitos testes unitários para validar o funcionamento do componente?
+  - [ ] A cobertura de testes foi de 100%?
+  - [ ] O componente foi documentado?
+- [ ] É uma nova funcionalidade dentro de um componente existente?
+  - [ ] Para essa nova funcionalidade, foram criados testes para garantir que esteja atendendo aos cenários estabelecidos?
+  - [ ] Os testes anteriores do componentes continuam com cobertura de 100% após a implementação dessa nova funcionalidade?
+  - [ ] A nova funcionalidade, é uma propriedade?
+    - [ ] Essa propriedade foi documentada na tabela de propriedades do componente?
+  - [ ] A nova funcionalidade, vai além da adição de uma propriedade nova, e exige um pouco mais de configuração?
+    - [ ] Essa nova funcionalidade, foi incrementada na documentação do componente?
+  - [ ] É uma alteração ou ajuste dentro de um componente existente?
+    - [ ] Os testes continuam com cobertura de 100%?
+```
