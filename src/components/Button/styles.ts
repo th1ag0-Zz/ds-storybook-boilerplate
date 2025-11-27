@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants';
 
 export const buttonStyles = tv({
-  base: '',
+  base: 'bg-primary-500 w-[200px] cursor-pointer',
 });

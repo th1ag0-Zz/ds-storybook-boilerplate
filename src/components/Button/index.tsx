@@ -3,7 +3,7 @@ import type { IButtonProps } from './types';
 
 const Button = (props: IButtonProps) => {
   return (
-    <div className={ buttonStyles() } {...props}>
+    <div className={buttonStyles()} {...props}>
       Button
     </div>
   );
