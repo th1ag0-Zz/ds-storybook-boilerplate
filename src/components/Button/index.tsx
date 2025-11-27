@@ -1,11 +1,14 @@
-import colors from "../../styles/tokens/colors";
+import { buttonStyles } from './styles';
+import type { IButtonProps } from './types';
 
-const Button = () => {
+const Button = (props: IButtonProps) => {
   return (
-    <button type="button" className="text-text-primary">
-      <p style={{ color: colors.primary[100] }}>Click me!</p>
-    </button>
+    <div className={ buttonStyles() } {...props}>
+      Button
+    </div>
   );
 };
+
+Button.displayName = 'Button';
 
 export default Button;

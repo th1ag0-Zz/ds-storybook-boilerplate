@@ -1,0 +1,67 @@
+import {
+  Canvas,
+  Controls,
+  Subtitle,
+  Title,
+  Meta
+} from "@storybook/addon-docs/blocks";
+
+import CodeDocumentationTable from "../../../CodeDocumentationTable";
+import DetailsCode from "../../../DetailsCode";
+import Functionality from "../../../Functionality";
+import * as ButtonStories from '../index.stories';
+
+<Title />
+
+<Meta of={ButtonStories} />
+
+<Subtitle>Descrição do componente Button</Subtitle>
+
+<Canvas of={ ButtonStories.Default } />
+
+<Functionality list={[
+ "Funcionalidades do componente do componente Button"
+ ]} />
+
+## Sumário
+
+- [Objetivo](#objetivo)
+- [Acessibilidade](#acessibilidade)
+- [Utilização](#utilização)
+- [Propriedades](#propriedades)
+
+## Objetivo
+
+O objetivo do componente **Button** é ...
+
+## Acessibilidade
+
+Veja abaixo as interações de teclado disponíveis no componente `Button`:
+
+<CodeDocumentationTable
+  codesList={[
+    {
+      key: 'Nenhuma interação',
+      description: ['Descrição das interações no componente Button'],
+    },
+  ]}
+/>
+
+## Utilização
+
+<DetailsCode summary="index.ts">
+  
+```tsx
+import { Button } from '@azul/react-web-components';
+
+const App = () => {
+  return (
+    <Button  />
+  );
+};
+```
+</DetailsCode>
+
+## Propriedades
+
+<Controls />
