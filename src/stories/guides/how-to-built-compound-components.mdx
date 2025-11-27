@@ -2,35 +2,77 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 <Meta title="Guias/Como construir compound components?" />
 
-# Como construir compound components?
+# **Como construir compound components?**
 
 ## Estrutura de Diretórios
 
-Primeiro, vamos criar a estrutura de diretórios necessária para o novo componente 
-dentro de packages/react/src/components:
+Primeiro, vamos criar a estrutura de diretórios necessária para o novo componente dentro de packages/react/src/components:
 
 ```
-MyComponent/
+Accordion/
 ├── components/
-│   ├── MyComponentRoot/
+│   ├── AccordionArrow/
 │   │   ├── index.tsx
-│   │   └── types.ts
-│   ├── MyComponentSubComponent1/
+│   │   ├── types.ts
+│   │   └── styles.ts
+│   ├── AccordionContent/
 │   │   ├── index.tsx
-│   │   └── types.ts
-│   └── MyComponentSubComponent2/
+│   │   ├── types.ts
+│   │   └── styles.ts
+│   ├── AccordionItem/
+│   │   ├── index.tsx
+│   │   ├── types.ts
+│   │   └── styles.ts
+│   ├── AccordionRoot/
+│   │   ├── index.tsx
+│   │   ├── types.ts
+│   │   └── styles.ts
+│   ├── AccordionTitle/
+│   │   ├── index.tsx
+│   │   ├── types.ts
+│   │   └── styles.ts
+│   └── AccordionTrigger/
 │       ├── index.tsx
-│       └── types.ts
+│       ├── types.ts
+│       └── styles.ts
+│
+├── context/
+│   ├── index.ts
+│   └── types.ts
+│
+├── stories/
+│   ├── docs/
+│   │   ├── props-types/
+│   │   │   ├── components.ts
+│   │   │   ├── index.ts
+│   │   │   ├── props.ts
+│   │   │   └── propsTable.tsx
+│   │   └── Accordion.mdx
+│   │
+│   ├── templates/
+│   │   ├── index.tsx
+│   │   ├── mock.ts
+│   │   └── index.stories.tsx
+│   │
+│   └── test/
+│       ├── index.ts
+│       └── index.tsx
+│
 └── index.tsx
+
 ```
+
+{/* ![estrutura de pastas](attachment:3cb48070-5bce-4396-8c44-27af5a238bd0:image.png)
+
+estrutura de pastas */}
 
 ## Passo a Passo
 
-### 1. Criar o Arquivo Principal
+### **1. Criar o Arquivo Principal**
 
-Crie o arquivo index.tsx na raiz do componente:
+Crie o arquivo `index.tsx` na raiz do componente:
 
-```tsx
+```jsx
 import '../../styles/index.css';
 
 import { MyComponentRoot } from './components/MyComponentRoot';
@@ -54,13 +96,13 @@ export const MyComponent = {
 };
 ```
 
-### 2. Implementar os Subcomponentes
+### **2. Implementar os Subcomponentes**
 
-Para cada subcomponente, crie os arquivos necessários:
+Para cada **subcomponente**, crie os arquivos necessários:
 
-**MyComponentRoot/types.ts:**
+**`MyComponentRoot/types.ts`:**
 
-```ts
+```jsx
 import { ReactNode } from 'react';
 
 interface IMyComponentRootProps {
@@ -70,9 +112,9 @@ interface IMyComponentRootProps {
 export type { IMyComponentRootProps };
 ```
 
-**MyComponentRoot/index.tsx:**
+**`MyComponentRoot/index.tsx`:**
 
-```tsx
+```jsx
 import { IMyComponentRootProps } from './types';
 
 export function MyComponentRoot({ children }: IMyComponentRootProps) {
@@ -84,63 +126,48 @@ export function MyComponentRoot({ children }: IMyComponentRootProps) {
 }
 ```
 
-### 3. Adicionar ao Arquivo de Exports
+### **3. Adicionar ao Arquivo de Exports**
 
-Adicione o novo componente ao arquivo packages/react/src/components/index.ts:
+Adicione o novo componente ao arquivo `packages/index.ts`:
 
-```ts
+```jsx
 export const components = {
   accordion: 'components/Accordion',
   notification: 'components/Notification',
-  mycomponent: 'components/MyComponent', // Novo componente
+  mycomponent: 'components/MyComponent',// Novo componente
 } as const;
 ```
 
-### 4. Exportar no Arquivo Principal
+### **4. Exportar no Arquivo Principal**
 
-Adicione a exportação no arquivo packages/react/src/index.tsx:
+Adicione a exportação no arquivo `packages/accordion.tsx`:
 
-```ts
-import './styles/index.css';
+```jsx
+export { default } from '../components/Accordion';
+export type {
+  AccordionSingleProps,
+  AccordionMultipleProps,
+  IAccordionItemProps,
+} from '../components/Accordion';
 
-export * from './components/Accordion';
-export * from './components/Notification';
-export * from './components/MyComponent'; // Nova exportação
 ```
 
-### 5. Configurar Package.json
-
-O script generate-exports.ts irá automaticamente atualizar o package.json com as 
-novas exportações quando você executar o build. O resultado será similar a:
-
-```json
-{
-  "exports": {
-    "./mycomponent": {
-      "types": "./dist/components/MyComponent/index.d.ts",
-      "import": "./dist/components/MyComponent/index.mjs",
-      "require": "./dist/components/MyComponent/index.js"
-    }
-  }
-}
-```
-
-### 6. Build e Teste
+### **5. Build e Teste**
 
 Após implementar o componente, execute:
 
 ```bash
-pnpm build
+npm run build
 ```
 
 Agora você pode importar o componente de duas formas:
 
-```tsx
+```jsx
 // Importação completa
-import { MyComponent } from '@monorepo-ds-boilerplate/react';
+import { MyComponent } from '@react-web-components/react';
 
 // Importação individual
-import { MyComponent } from '@monorepo-ds-boilerplate/react/mycomponent';
+import { MyComponent } from '@react-web-components/react/mycomponent';
 ```
 
 ## Observações Importantes
@@ -149,5 +176,3 @@ import { MyComponent } from '@monorepo-ds-boilerplate/react/mycomponent';
 - 2 - Adicione testes para o novo componente
 - 3 - Documente o componente no Storybook
 - 4 - Mantenha a consistência com os outros componentes do Design System
-
-Para exemplos práticos de implementação, você pode se basear nos componentes existentes de Accordion e Notification.

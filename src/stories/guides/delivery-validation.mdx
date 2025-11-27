@@ -10,22 +10,47 @@ itens dentro da descrição e marcá-los como feitos conforme os cenários estab
 e, caso não tenham sido cumpridos, realizar as mudanças necessárias para que os itens 
 sejam atendidos e assim enviar o Pull Request.
 
-```markdown
-- [ ] Está atendendo aos padrões estabelecidos de JSX/React?
-- [ ] É um novo componente?
-  - [ ] É um componente complexo que possui diversos subcomponentes?
-    - [ ] Foi desenvolvido atendendo o Pattern Compound?
-  - [ ] Foi estilizado com Tailwind?
-  - [ ] Foram feitos testes unitários para validar o funcionamento do componente?
-  - [ ] A cobertura de testes foi de 100%?
-  - [ ] O componente foi documentado?
-- [ ] É uma nova funcionalidade dentro de um componente existente?
-  - [ ] Para essa nova funcionalidade, foram criados testes para garantir que esteja atendendo aos cenários estabelecidos?
-  - [ ] Os testes anteriores do componentes continuam com cobertura de 100% após a implementação dessa nova funcionalidade?
-  - [ ] A nova funcionalidade, é uma propriedade?
-    - [ ] Essa propriedade foi documentada na tabela de propriedades do componente?
-  - [ ] A nova funcionalidade, vai além da adição de uma propriedade nova, e exige um pouco mais de configuração?
-    - [ ] Essa nova funcionalidade, foi incrementada na documentação do componente?
-  - [ ] É uma alteração ou ajuste dentro de um componente existente?
-    - [ ] Os testes continuam com cobertura de 100%?
-```
+Descreva o problema, a solução proposta e o impacto da mudança.
+
+Ex: Adicionada prop `loading` ao `<Button>` para exibir spinner (mudança não breaking).
+
+> Se a alteração for visual, inclua capturas de tela ou GIFs do Storybook.
+
+## ✅ Checklist Review PR
+
+> Preencha a seção Geral e a a seção que corresponde ao tipo de mudança do PR.Marque cada item concluído antes de solicitar a revisão.
+
+### 📌 Geral
+
+- [ ]  Definidos **dois required reviewers** no Azure
+- [ ]  Descrição da PR clara e objetiva
+- [ ]  Nome da **branch** e **commits** seguem o padrão do [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [ ]  Branch **target** correta? (default: `develop`)
+- [ ]  Código segue os padrões estabelecidos de **JSX/React**
+- [ ]  Documentação revisada e atualizada (quando aplicável)
+
+---
+
+### 🚀 Feature — Novo Componente
+
+- [ ]  Componente desenvolvido seguindo boas práticas
+- [ ]  Uso do **Pattern Compound** (apenas para componentes **complexos** com subcomponentes)
+- [ ]  Estilização feita com **Tailwind**
+- [ ]  Testes unitários implementados para validar o funcionamento
+- [ ]  **Cobertura de testes 100%**
+- [ ]  Componente devidamente **documentado**
+- [ ]  Exportação do componente, types e utilitários adicionada dentro da pasta `src/packages`
+
+---
+
+### ✨ Feature — Novas Funcionalidades
+
+- [ ]  Testes implementados para os novos cenários
+- [ ]  Testes existentes mantêm **100% de cobertura**
+- [ ]  Se a funcionalidade adiciona uma **nova propriedade**, ela foi documentada na **tabela de propriedades**
+
+---
+
+### 🛠️ Bugfix / Refactor — Ajustes e Alterações
+
+- [ ]  Testes continuam com **100% de cobertura**
