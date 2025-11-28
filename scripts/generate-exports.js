@@ -7,7 +7,7 @@ const distEsm = './dist/esm/packages/';
 const distCjs = './dist/cjs/packages/';
 const distTypes = './dist/packages/';
 
-const ignore = ['index.ts', 'output.css', 'tailwind.css'];
+const ignore = ['index.ts', 'tailwind.css'];
 
 const files = fs.readdirSync(srcDir)
   .filter(f => f.endsWith('.ts') && !ignore.includes(f));

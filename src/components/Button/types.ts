@@ -1,1 +1,0 @@
-export interface IButtonProps extends React.HTMLAttributes<HTMLDivElement> {}

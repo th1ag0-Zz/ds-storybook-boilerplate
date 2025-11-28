@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "importHelpers": true,
+    "sourceMap": false,
+    "inlineSources": false,
+    "noEmit": false,
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "**/node_modules/**",
+    "**/cypress/**",
+    "**/storybook/**",
+    "**/stories/**",
+    "dist",
+    "docs",
+    "scripts",
+    "storybook-static",
+    "**/*.test.tsx",
+    "**/*.stories.tsx",
+    "**/*.cy.tsx",
+    "**/tests/**",
+    "**/mocks/**",
+    "**/templates/**"
+  ]
+}

@@ -1,0 +1,142 @@
+import {
+  Canvas,
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  ArgTypes
+} from "@storybook/addon-docs/blocks";
+
+import { CircleCheck } from 'lucide-react';
+// import { colors } from '@monorepo-ds-boilerplate/tokens';
+
+import * as AccordionStories from "../index.stories";
+
+import { DocPropTableTabs } from '../../../../stories/components/DocPropTableTabs';
+
+import { accordionComponents, accordionPropsTable } from './props-types/Accordion';
+
+<style>
+  {`
+    .row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.05rem;
+    }
+    
+    .item-description {
+      margin-left: 0.50rem;
+    }
+
+    .item-description p {
+      font-size: 17px;
+    }
+`}
+</style>
+
+<Meta of={AccordionStories} />
+
+<Title />
+<Subtitle>
+  Componente de Acordeão para Exibição de Conteúdo Expansível
+</Subtitle>
+
+<Canvas of={AccordionStories.Default} />
+
+## Funcionalidades
+
+<div className="row">
+  <CircleCheck color={"#000"} />
+  <strong className="item-description">
+    Permite expandir e recolher seções de conteúdo através de um trigger clicável.
+  </strong>
+</div>
+<div className="row">
+  <CircleCheck color={"#000"} />
+  <strong className="item-description">
+    Suporta múltiplos itens de acordeão com títulos e conteúdos personalizáveis.
+  </strong>
+</div>
+<div className="row">
+  <CircleCheck color={"#000"} />
+  <strong className="item-description">
+    Controle de estado para gerenciar qual item está aberto através da propriedade
+    `isOpen`.
+  </strong>
+</div>
+<div className="row">
+  <CircleCheck color={"#000"} />
+  <strong className="item-description">
+    Utiliza o padrão Compound Components para maior flexibilidade e composição.
+  </strong>
+</div>
+<div className="row">
+  <CircleCheck color={"#000"} />
+  <strong className="item-description">
+    Possui animação suave de rotação no ícone indicador de expansão.
+  </strong>
+</div>
+
+## Sumário
+
+- [Objetivo](#objetivo)
+- [Utilização](#utilização)
+- [Propriedades](#propriedades)
+
+## Objetivo
+
+O componente Accordion é projetado para organizar e apresentar conteúdo em seções expansíveis, permitindo que os usuários visualizem ou ocultem informações conforme necessário. Ele é especialmente útil quando há necessidade de exibir grandes quantidades de conteúdo em um espaço limitado, melhorando a experiência do usuário através de uma interface limpa e interativa.
+
+## Utilização
+
+Para utilizar o componente Accordion, importe-o e utilize seus subcomponentes conforme necessário. Aqui está um exemplo de uso:
+
+```tsx
+import { useState } from 'react';
+import { Accordion } from '@monorepo-ds-boilerplate/react';
+
+export default function AccordionTemplate() {
+  const [openItem, setOpenItem] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setOpenItem(openItem === index ? null : index);
+  };
+
+  const items = [
+    {
+      title: 'O que é um Design System?',
+      content:
+        'Um Design System é uma coleção de componentes reutilizáveis, guiados por padrões claros que podem ser montados para construir aplicações.',
+    },
+    {
+      title: 'Como usar o Compound Pattern?',
+      content:
+        'O Compound Pattern permite criar componentes mais flexíveis e modulares, dividindo-os em subcomponentes menores que trabalham juntos.',
+    },
+  ];
+
+  return (
+    <Accordion.Root>
+      {items.map((item, index) => (
+        <Accordion.Item key={index}>
+          <Accordion.Trigger
+            title={item.title}
+            isOpen={openItem === index}
+            onClick={() => handleToggle(index)}
+          />
+          <Accordion.Content isOpen={openItem === index}>{item.content}</Accordion.Content>
+        </Accordion.Item>
+      ))}
+    </Accordion.Root>
+  );
+}
+```
+
+## Propriedades
+
+Aqui estão as propriedades do componente `Accordion`:
+
+<DocPropTableTabs 
+  components={accordionComponents}
+  componentsPropsTable={accordionPropsTable}
+/>
